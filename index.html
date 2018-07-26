@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type = "text/javascript" src = "https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    <title>Technical Documentation</title>
+</head>
+<body>
+    <main id = "main-doc">
+        <section class = "main-section" id = "Digital_Pins">
+                <header><h1>Digital Pins</h1></header>
+                <p>The pins on the Arduino can be 
+                    configured as either inputs or outputs. 
+                    This document explains the functioning of the pins in those modes. 
+                    While the title of this document refers to digital pins, it is important 
+                    to note that vast majority of Arduino (Atmega) analog pins, may be configured, 
+                    and used, in exactly the same manner as digital pins. </p>
+
+                <h2>Properties of Pins Configured as INPUT</h2>
+                <p>Arduino (Atmega) pins default to inputs, so they don't need to be explicitly declared as inputs with pinMode() when you're using them as inputs. Pins configured this way are said to be in a high-impedance state. Input pins make extremely small demands on the circuit that they are sampling, equivalent to a series resistor of 100 megohm in front of the pin. This means that it takes very little current to move the input pin from one state to another, and can make the pins useful for such tasks as implementing a capacitive touch sensor, reading an LED as a photodiode, or reading an analog sensor with a scheme such as RCTime.</p>
+                <p>This also means however, that pins configured as pinMode(pin, INPUT) with nothing connected to them, or with wires connected to them that are not connected to other circuits, will report seemingly random changes in pin state, picking up electrical noise from the environment, or capacitively coupling the state of a nearby pin. </p>
+                
+                <h2>Pullup Resistors with pins configured as INPUT</h2>
+                <p>Often it is useful to steer an input pin to a known state if no input is present. This can be done by adding a pullup resistor (to +5V), or a pulldown resistor (resistor to ground) on the input. A 10K resistor is a good value for a pullup or pulldown resistor. </p>
+                    
+                <h2>Properties of Pins Configured as INPUT_PULLUP</h2>
+                <p>There are 20K pullup resistors built into the Atmega chip that can be accessed from software. These built-in pullup resistors are accessed by setting the pinMode() as INPUT_PULLUP. This effectively inverts the behavior of the INPUT mode, where HIGH means the sensor is off, and LOW means the sensor is on. </p>
+                <p>The value of this pullup depends on the microcontroller used. On most AVR-based boards, the value is guaranteed to be between 20kΩ and 50kΩ. On the Arduino Due, it is between 50kΩ and 150kΩ. For the exact value, consult the datasheet of the microcontroller on your board. </p>
+                <p>When connecting a sensor to a pin configured with INPUT_PULLUP, the other end should be connected to ground. In the case of a simple switch, this causes the pin to read HIGH when the switch is open, and LOW when the switch is pressed. </p>
+                <p>The pullup resistors provide enough current to dimly light an LED connected to a pin that has been configured as an input. If LEDs in a project seem to be working, but very dimly, this is likely what is going on. </p>
+                <p>The pullup resistors are controlled by the same registers (internal chip memory locations) that control whether a pin is HIGH or LOW. Consequently, a pin that is configured to have pullup resistors turned on when the pin is an INPUT, will have the pin configured as HIGH if the pin is then switched to an OUTPUT with pinMode(). This works in the other direction as well, and an output pin that is left in a HIGH state will have the pullup resistors set if switched to an input with pinMode(). </p>
+                <p>Prior to Arduino 1.0.1, it was possible to configure the internal pull-ups in the following manner: </p>
+                <pre><code>
+                    pinMode(pin, INPUT);           // set pin to input
+                    digitalWrite(pin, HIGH);       // turn on pullup resistors</code></pre>
+                <p>
+                    <strong>NOTE</strong> Digital pin 13 is harder to use as a digital input than the other digital pins because it has an LED and resistor attached to it that's soldered to the board on most boards. If you enable its internal 20k pull-up resistor, it will hang at around 1.7V instead of the expected 5V because the onboard LED and series resistor pull the voltage level down, meaning it always returns LOW. If you must use pin 13 as a digital input, set its pinMode() to INPUT and use an external pull down resistor. 
+                </p>
+
+                <h2>Properties of Pins Configured as OUTPUT</h2>
+                <p>Pins configured as OUTPUT with pinMode() are said to be in a low-impedance state. This means that they can provide a substantial amount of current to other circuits. Atmega pins can source (provide positive current) or sink (provide negative current) up to 40 mA (milliamps) of current to other devices/circuits. This is enough current to brightly light up an LED (don't forget the series resistor), or run many sensors, for example, but not enough current to run most relays, solenoids, or motors. </p>
+                <p>Short circuits on Arduino pins, or attempting to run high current devices from them, can damage or destroy the output transistors in the pin, or damage the entire Atmega chip. Often this will result in a "dead" pin in the microcontroller but the remaining chip will still function adequately. For this reason it is a good idea to connect OUTPUT pins to other devices with 470Ω or 1k resistors, unless maximum current draw from the pins is required for a particular application.</p>
+                
+        </section>
+        <section class = "main-section" id = "Analogue_Pins">
+            <header>
+                <h1>Analogue Pins</h1>
+            </header>
+            <p>A description of the analog input pins on an Arduino chip (ATmega8, ATmega168, ATmega328P, or ATmega1280). </p>
+            <h2>A/D converter</h2>
+            <p>The ATmega controllers used for the Arduino contain an onboard 6 channel (8 channels on the Mini and Nano, 16 on the Mega) analog-to-digital (A/D) converter. The converter has 10 bit resolution, returning integers from 0 to 1023. While the main function of the analog pins for most Arduino users is to read analog sensors, the analog pins also have all the functionality of general purpose input/output (GPIO) pins (the same as digital pins 0 - 13). </p>
+            <p>Consequently, if a user needs more general purpose input output pins, and all the analog pins are not in use, the analog pins may be used for GPIO. </p>
+
+            <h2>Pin mapping</h2>
+            <p>The analog pins can be used identically to the digital pins, using the aliases A0 (for analog input 0), A1, etc. For example, the code would look like this to set analog pin 0 to an output, and to set it HIGH: </p>
+            <pre><code>
+                pinMode(A0, OUTPUT);
+                digitalWrite(A0, HIGH);
+            </code></pre>
+            
+            <h2>Pull-up resistors</h2>
+            <p>The analog pins also have pull-up resistors, which work identically to pull-up resistors on the digital pins. They are enabled by issuing a command such as </p>
+            <code>pinMode(A0, INPUT_PULLUP);  // set pull-up on analog pin 0 </code>
+            <p>Be aware however that turning on a pull-up will affect the values reported by analogRead(). </p>
+
+            <h2>Details and Caveats</h2>
+            <p>The analogRead command will not work correctly if a pin has been previously set to an output, so if this is the case, set it back to an input before using analogRead. Similarly if the pin has been set to HIGH as an output, the pull-up resistor will be set, when switched back to an input. </p>
+            <p>The ATmega datasheet also cautions against switching analog pins in close temporal proximity to making A/D readings (analogRead) on other analog pins. This can cause electrical noise and introduce jitter in the analog system. It may be desirable, after manipulating analog pins (in digital mode), to add a short delay before using analogRead() to read other analog pins. </p>
+        </section>
+        <section class = "main-section" id = "PWM">
+            <header>
+                <h1>PWM</h1>
+            </header>
+            <p>The Fading example demonstrates the use of analog output (PWM) to fade an LED. It is available in the File->Sketchbook->Examples->Analog menu of the Arduino software.</p>
+            <p>Pulse Width Modulation, or PWM, is a technique for getting analog results with digital means. Digital control is used to create a square wave, a signal switched between on and off. This on-off pattern can simulate voltages in between full on (5 Volts) and off (0 Volts) by changing the portion of the time the signal spends on versus the time that the signal spends off. The duration of "on time" is called the pulse width. To get varying analog values, you change, or modulate, that pulse width. If you repeat this on-off pattern fast enough with an LED for example, the result is as if the signal is a steady voltage between 0 and 5v controlling the brightness of the LED. </p>
+            <p>In the graphic below, the green lines represent a regular time period. This duration or period is the inverse of the PWM frequency. In other words, with Arduino's PWM frequency at about 500Hz, the green lines would measure 2 milliseconds each. A call to analogWrite() is on a scale of 0 - 255, such that analogWrite(255) requests a 100% duty cycle (always on), and analogWrite(127) is a 50% duty cycle (on half the time) for example. </p>
+            <img alt= "pulse width modulation diagram" src= "https://www.arduino.cc/en/uploads/Tutorial/pwm.gif"/>
+            <p>Once you get this example running, grab your arduino and shake it back and forth. What you are doing here is essentially mapping time across the space. To our eyes, the movement blurs each LED blink into a line. As the LED fades in and out, those little lines will grow and shrink in length. Now you are seeing the pulse width. </p>
+            <p><i>Written by Timothy Hirzel</i></p>
+        </section>
+        <section class = "main-section" id = "Memory">
+            <header>
+                <h1>Memory</h1>
+            </header>
+            <p>The notes on this page are for all boards except the Due, which has a different architecture</p>
+            <p>There are three pools of memory in the microcontroller used on avr-based Arduino boards : </p>
+            <ul>
+                <li>Flash memory (program space), is where the Arduino sketch is stored. </li>
+                <li>SRAM (static random access memory) is where the sketch creates and manipulates variables when it runs. </li>
+                <li>EEPROM is memory space that programmers can use to store long-term information.</li>
+            </ul>
+            <p>Flash memory and EEPROM memory are non-volatile (the information persists after the power is turned off). SRAM is volatile and will be lost when the power is cycled. </p>
+            <p>The ATmega328 chip found on the Uno has the following amounts of memory: </p>
+            <pre><code>
+                Flash  32k bytes (of which .5k is used for the bootloader)
+                SRAM   2k bytes
+                EEPROM 1k byte
+            </code></pre>
+            <p>The ATmega2560 in the Mega2560 has larger memory space :</p>
+            <pre><code>
+                Flash  256k bytes (of which 8k is used for the bootloader)
+                SRAM   8k bytes
+                EEPROM 4k byte
+            </code></pre>
+            <p>Notice that there's not much SRAM available in the Uno. It's easy to use it all up by having lots of strings in your program. For example, a declaration like: </p>
+            <p>char message[] = "I support the Cape Wind project."; </p>
+            <p>puts 33 bytes into SRAM (each character takes a byte, plus the '\0' terminator). This might not seem like a lot, but it doesn't take long to get to 2048, especially if you have a large amount of text to send to a display, or a large lookup table, for example. </p>
+            <p>If you run out of SRAM, your program may fail in unexpected ways; it will appear to upload successfully, but not run, or run strangely. To check if this is happening, you can try commenting out or shortening the strings or other data structures in your sketch (without changing the code). If it then runs successfully, you're probably running out of SRAM. There are a few things you can do to address this problem: </p>
+            <ul>
+                <li>If your sketch talks to a program running on a (desktop/laptop) computer, you can try shifting data or calculations to the computer, reducing the load on the Arduino. </li>
+                <li>If you have lookup tables or other large arrays, use the smallest data type necessary to store the values you need; for example, an int takes up two bytes, while a byte uses only one (but can store a smaller range of values). </li>
+                <li>If you don't need to modify the strings or data while your sketch is running, you can store them in flash (program) memory instead of SRAM; to do this, use the PROGMEM keyword. </li>
+            </ul>
+        </section>
+        <section class = "main-section" id = "Language_Reference">
+            <header>
+                    <h1>Language Reference</h1>
+            </header>
+        </section>
+        <section class = "main-section" id = "Variables">
+            <header>
+                    <h1>Variables</h1>
+            </header>
+        </section>
+        <section class = "main-section" id = "Functions">
+            <header>
+                    <h1>Functions</h1>
+            </header>
+        </section>
+        <section class = "main-section" id = "Library">
+            <header>
+                    <h1>Library</h1>
+            </header>
+        </section>
+        <section class = "main-section" id = "Cores">
+            <header>
+                    <h1>Cores</h1>
+            </header>
+        </section>
+        <section class = "main-section" id = "Vidor_HLD_Basics">
+            <header>
+                    <h1>Vidor HLD Basics</h1>
+            </header>
+        </section>
+    </main>
+    <footer>
+        <p>Not legitimate Arduino Page, all text copied from Arduino Website created for FreeCodeCamp Technical Documentation Project</p>
+    </footer>
+</body>
+</html>
+
+<!-- https://www.arduino.cc/en/Tutorial/Foundations-->
