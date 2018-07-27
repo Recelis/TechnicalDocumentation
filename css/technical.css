@@ -1,0 +1,42 @@
+body{
+    display:flex;
+    flex-direction:column; /* tablet or smaller*/
+}
+
+#navbar{
+    display:flex;
+    flex-direction:column;
+    padding:10px;
+    height:100vh;
+}
+
+.nav-link{
+    font-size:18px;
+    text-decoration:none;
+    color:black;
+    border-style: solid;
+    border-color:black;
+    border-width:1px 0px 0px 0px; 
+    width:100%;
+}
+
+.nav-link:hover{
+    color:grey;
+}
+
+main{
+    flex:auto;
+    overflow:auto;
+}
+
+@media(min-width:1025px){ /* big size*/
+    body{
+        flex-direction:row;
+    }
+    #navbar{
+        flex-direction:column;
+    }
+    .nav-link{
+        padding-top:20px;
+    }
+}

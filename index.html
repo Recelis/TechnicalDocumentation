@@ -4,11 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel = "stylesheet" type = "text/css" href = "css/technical.css"/>
     <script type = "text/javascript" src = "https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
     <title>Technical Documentation</title>
 </head>
 <body>
+    <nav id = "navbar">
+        <header>
+            <h1>Arduino Technical Documentation</h1>
+        </header>
+        <a class = "nav-link" href = "#Introduction">Introduction</a>
+        <a class = "nav-link" href = "#Arduino_Genuino_Uno_Board_Anatomy">Arduino Genuino Uno Board Anatomy</a>
+        <a class = "nav-link" href = "#Digital_Pins">Digital Pins</a>
+        <a class = "nav-link" href = "#Analogue_Pins">Analogue Pins</a>
+        <a class = "nav-link" href = "#PWM">PWM</a>
+        <a class = "nav-link" href = "#Memory">Memory</a>
+    </nav>
     <main id = "main-doc">
+        <section class = "main-section" id = "Introduction">
+                <header>
+                    <h2>Introduction</h2>
+                </header>
+                <h3>What is Arduino?</h3>
+                <p>Arduino is an open-source electronics platform based on easy-to-use hardware and software. Arduino boards are able to read inputs - light on a sensor, a finger on a button, or a Twitter message - and turn it into an output - activating a motor, turning on an LED, publishing something online. You can tell your board what to do by sending a set of instructions to the microcontroller on the board. To do so you use the Arduino programming language (based on Wiring), and the Arduino Software (IDE), based on Processing.</p>
+                <p>Over the years Arduino has been the brain of thousands of projects, from everyday objects to complex scientific instruments. A worldwide community of makers - students, hobbyists, artists, programmers, and professionals - has gathered around this open-source platform, their contributions have added up to an incredible amount of accessible knowledge that can be of great help to novices and experts alike. </p>
+                <p>Arduino was born at the Ivrea Interaction Design Institute as an easy tool for fast prototyping, aimed at students without a background in electronics and programming. As soon as it reached a wider community, the Arduino board started changing to adapt to new needs and challenges, differentiating its offer from simple 8-bit boards to products for IoT applications, wearable, 3D printing, and embedded environments. All Arduino boards are completely open-source, empowering users to build them independently and eventually adapt them to their particular needs. The software, too, is open-source, and it is growing through the contributions of users worldwide. </p>
+                <h3>Why Arduino?</h3>
+                <p>Thanks to its simple and accessible user experience, Arduino has been used in thousands of different projects and applications. The Arduino software is easy-to-use for beginners, yet flexible enough for advanced users. It runs on Mac, Windows, and Linux. Teachers and students use it to build low cost scientific instruments, to prove chemistry and physics principles, or to get started with programming and robotics. Designers and architects build interactive prototypes, musicians and artists use it for installations and to experiment with new musical instruments. Makers, of course, use it to build many of the projects exhibited at the Maker Faire, for example. Arduino is a key tool to learn new things. Anyone - children, hobbyists, artists, programmers - can start tinkering just following the step by step instructions of a kit, or sharing ideas online with other members of the Arduino community. </p>
+                <p>There are many other microcontrollers and microcontroller platforms available for physical computing. Parallax Basic Stamp, Netmedia's BX-24, Phidgets, MIT's Handyboard, and many others offer similar functionality. All of these tools take the messy details of microcontroller programming and wrap it up in an easy-to-use package. Arduino also simplifies the process of working with microcontrollers, but it offers some advantage for teachers, students, and interested amateurs over other systems: </p>
+                <ul>
+                    <li>Inexpensive - Arduino boards are relatively inexpensive compared to other microcontroller platforms. The least expensive version of the Arduino module can be assembled by hand, and even the pre-assembled Arduino modules cost less than $50 </li>
+                    <li>Cross-platform - The Arduino Software (IDE) runs on Windows, Macintosh OSX, and Linux operating systems. Most microcontroller systems are limited to Windows. </li>
+                    <li>Simple, clear programming environment - The Arduino Software (IDE) is easy-to-use for beginners, yet flexible enough for advanced users to take advantage of as well. For teachers, it's conveniently based on the Processing programming environment, so students learning to program in that environment will be familiar with how the Arduino IDE works. </li>
+                    <li>Open source and extensible software - The Arduino software is published as open source tools, available for extension by experienced programmers. The language can be expanded through C++ libraries, and people wanting to understand the technical details can make the leap from Arduino to the AVR C programming language on which it's based. Similarly, you can add AVR-C code directly into your Arduino programs if you want to. </li>
+                    <li>Open source and extensible hardware - The plans of the Arduino boards are published under a Creative Commons license, so experienced circuit designers can make their own version of the module, extending it and improving it. Even relatively inexperienced users can build the breadboard version of the module in order to understand how it works and save money. </li>
+                </ul>
+        </section>
+        <section class = "main-section" id = "Arduino_Genuino_Uno_Board_Anatomy">
+            <header>
+                <h1>Arduino Genuino Uno Board Anatomy</h1>
+            </header>
+            <p>Arduino/Genuino boards senses the environment by receiving inputs from many sensors, and affects their surroundings by controlling lights, motors, and other actuators. Arduino/Genuino boards are the microcontroller development platform that will be at the heart of your projects. When making something you will be building the circuits and interfaces for interaction, and telling the microcontroller how to interface with other components. Here the anatomy of Arduino/Genuino Uno. </p>
+            <img alt= "arduino diagram" src = "https://www.arduino.cc/en/uploads/Main/BoardAnatomy.svg">
+            <ol>
+                <li>Digital pins Use these pins with digitalRead(), digitalWrite(), and analogWrite(). analogWrite() works only on the pins with the PWM symbol. </li>
+                <li>Pin 13 LED The only actuator built-in to your board. Besides being a handy target for your first blink sketch, this LED is very useful for debugging. </li>
+                <li>Power LED Indicates that your Genuino is receiving power. Useful for debugging. </li>
+                <li>ATmega microcontroller The heart of your board. </li>
+                <li>Analog in Use these pins with analogRead().</li>
+                <li>GND and 5V pins Use these pins to provide +5V power and ground to your circuits. </li>
+                <li>Power connector This is how you power your Genuino when it’s not plugged into a USB port for power. Can accept voltages between 7-12V. </li>
+                <li>TX and RX LEDs These LEDs indicate communication between your Genuino and your computer. Expect them to flicker rapidly during sketch upload as well as during serial communication. Useful for debugging. </li>
+                <li>USB port Used for powering your Genuino Uno, uploading your sketches to your Genuino, and for communicating with your Genuino sketch (via Serial. println() etc.). </li>
+                <li>Reset button Resets the ATmega microcontroller. </li>
+            </ol>
+        </section>
         <section class = "main-section" id = "Digital_Pins">
                 <header><h1>Digital Pins</h1></header>
                 <p>The pins on the Arduino can be 
@@ -18,14 +68,14 @@
                     to note that vast majority of Arduino (Atmega) analog pins, may be configured, 
                     and used, in exactly the same manner as digital pins. </p>
 
-                <h2>Properties of Pins Configured as INPUT</h2>
+                <h3>Properties of Pins Configured as INPUT</h3>
                 <p>Arduino (Atmega) pins default to inputs, so they don't need to be explicitly declared as inputs with pinMode() when you're using them as inputs. Pins configured this way are said to be in a high-impedance state. Input pins make extremely small demands on the circuit that they are sampling, equivalent to a series resistor of 100 megohm in front of the pin. This means that it takes very little current to move the input pin from one state to another, and can make the pins useful for such tasks as implementing a capacitive touch sensor, reading an LED as a photodiode, or reading an analog sensor with a scheme such as RCTime.</p>
                 <p>This also means however, that pins configured as pinMode(pin, INPUT) with nothing connected to them, or with wires connected to them that are not connected to other circuits, will report seemingly random changes in pin state, picking up electrical noise from the environment, or capacitively coupling the state of a nearby pin. </p>
                 
-                <h2>Pullup Resistors with pins configured as INPUT</h2>
+                <h3>Pullup Resistors with pins configured as INPUT</h3>
                 <p>Often it is useful to steer an input pin to a known state if no input is present. This can be done by adding a pullup resistor (to +5V), or a pulldown resistor (resistor to ground) on the input. A 10K resistor is a good value for a pullup or pulldown resistor. </p>
                     
-                <h2>Properties of Pins Configured as INPUT_PULLUP</h2>
+                <h3>Properties of Pins Configured as INPUT_PULLUP</h3>
                 <p>There are 20K pullup resistors built into the Atmega chip that can be accessed from software. These built-in pullup resistors are accessed by setting the pinMode() as INPUT_PULLUP. This effectively inverts the behavior of the INPUT mode, where HIGH means the sensor is off, and LOW means the sensor is on. </p>
                 <p>The value of this pullup depends on the microcontroller used. On most AVR-based boards, the value is guaranteed to be between 20kΩ and 50kΩ. On the Arduino Due, it is between 50kΩ and 150kΩ. For the exact value, consult the datasheet of the microcontroller on your board. </p>
                 <p>When connecting a sensor to a pin configured with INPUT_PULLUP, the other end should be connected to ground. In the case of a simple switch, this causes the pin to read HIGH when the switch is open, and LOW when the switch is pressed. </p>
@@ -39,7 +89,7 @@
                     <strong>NOTE</strong> Digital pin 13 is harder to use as a digital input than the other digital pins because it has an LED and resistor attached to it that's soldered to the board on most boards. If you enable its internal 20k pull-up resistor, it will hang at around 1.7V instead of the expected 5V because the onboard LED and series resistor pull the voltage level down, meaning it always returns LOW. If you must use pin 13 as a digital input, set its pinMode() to INPUT and use an external pull down resistor. 
                 </p>
 
-                <h2>Properties of Pins Configured as OUTPUT</h2>
+                <h3>Properties of Pins Configured as OUTPUT</h3>
                 <p>Pins configured as OUTPUT with pinMode() are said to be in a low-impedance state. This means that they can provide a substantial amount of current to other circuits. Atmega pins can source (provide positive current) or sink (provide negative current) up to 40 mA (milliamps) of current to other devices/circuits. This is enough current to brightly light up an LED (don't forget the series resistor), or run many sensors, for example, but not enough current to run most relays, solenoids, or motors. </p>
                 <p>Short circuits on Arduino pins, or attempting to run high current devices from them, can damage or destroy the output transistors in the pin, or damage the entire Atmega chip. Often this will result in a "dead" pin in the microcontroller but the remaining chip will still function adequately. For this reason it is a good idea to connect OUTPUT pins to other devices with 470Ω or 1k resistors, unless maximum current draw from the pins is required for a particular application.</p>
                 
@@ -49,29 +99,29 @@
                 <h1>Analogue Pins</h1>
             </header>
             <p>A description of the analog input pins on an Arduino chip (ATmega8, ATmega168, ATmega328P, or ATmega1280). </p>
-            <h2>A/D converter</h2>
+            <h3>A/D converter</h3>
             <p>The ATmega controllers used for the Arduino contain an onboard 6 channel (8 channels on the Mini and Nano, 16 on the Mega) analog-to-digital (A/D) converter. The converter has 10 bit resolution, returning integers from 0 to 1023. While the main function of the analog pins for most Arduino users is to read analog sensors, the analog pins also have all the functionality of general purpose input/output (GPIO) pins (the same as digital pins 0 - 13). </p>
             <p>Consequently, if a user needs more general purpose input output pins, and all the analog pins are not in use, the analog pins may be used for GPIO. </p>
 
-            <h2>Pin mapping</h2>
+            <h3>Pin mapping</h3>
             <p>The analog pins can be used identically to the digital pins, using the aliases A0 (for analog input 0), A1, etc. For example, the code would look like this to set analog pin 0 to an output, and to set it HIGH: </p>
             <pre><code>
                 pinMode(A0, OUTPUT);
                 digitalWrite(A0, HIGH);
             </code></pre>
             
-            <h2>Pull-up resistors</h2>
+            <h3>Pull-up resistors</h3>
             <p>The analog pins also have pull-up resistors, which work identically to pull-up resistors on the digital pins. They are enabled by issuing a command such as </p>
             <code>pinMode(A0, INPUT_PULLUP);  // set pull-up on analog pin 0 </code>
             <p>Be aware however that turning on a pull-up will affect the values reported by analogRead(). </p>
 
-            <h2>Details and Caveats</h2>
+            <h3>Details and Caveats</h3>
             <p>The analogRead command will not work correctly if a pin has been previously set to an output, so if this is the case, set it back to an input before using analogRead. Similarly if the pin has been set to HIGH as an output, the pull-up resistor will be set, when switched back to an input. </p>
             <p>The ATmega datasheet also cautions against switching analog pins in close temporal proximity to making A/D readings (analogRead) on other analog pins. This can cause electrical noise and introduce jitter in the analog system. It may be desirable, after manipulating analog pins (in digital mode), to add a short delay before using analogRead() to read other analog pins. </p>
         </section>
         <section class = "main-section" id = "PWM">
             <header>
-                <h1>PWM</h1>
+                <h2>PWM</h2>
             </header>
             <p>The Fading example demonstrates the use of analog output (PWM) to fade an LED. It is available in the File->Sketchbook->Examples->Analog menu of the Arduino software.</p>
             <p>Pulse Width Modulation, or PWM, is a technique for getting analog results with digital means. Digital control is used to create a square wave, a signal switched between on and off. This on-off pattern can simulate voltages in between full on (5 Volts) and off (0 Volts) by changing the portion of the time the signal spends on versus the time that the signal spends off. The duration of "on time" is called the pulse width. To get varying analog values, you change, or modulate, that pulse width. If you repeat this on-off pattern fast enough with an LED for example, the result is as if the signal is a steady voltage between 0 and 5v controlling the brightness of the LED. </p>
@@ -82,7 +132,7 @@
         </section>
         <section class = "main-section" id = "Memory">
             <header>
-                <h1>Memory</h1>
+                <h2>Memory</h2>
             </header>
             <p>The notes on this page are for all boards except the Due, which has a different architecture</p>
             <p>There are three pools of memory in the microcontroller used on avr-based Arduino boards : </p>
@@ -114,40 +164,11 @@
                 <li>If you don't need to modify the strings or data while your sketch is running, you can store them in flash (program) memory instead of SRAM; to do this, use the PROGMEM keyword. </li>
             </ul>
         </section>
-        <section class = "main-section" id = "Language_Reference">
-            <header>
-                    <h1>Language Reference</h1>
-            </header>
-        </section>
-        <section class = "main-section" id = "Variables">
-            <header>
-                    <h1>Variables</h1>
-            </header>
-        </section>
-        <section class = "main-section" id = "Functions">
-            <header>
-                    <h1>Functions</h1>
-            </header>
-        </section>
-        <section class = "main-section" id = "Library">
-            <header>
-                    <h1>Library</h1>
-            </header>
-        </section>
-        <section class = "main-section" id = "Cores">
-            <header>
-                    <h1>Cores</h1>
-            </header>
-        </section>
-        <section class = "main-section" id = "Vidor_HLD_Basics">
-            <header>
-                    <h1>Vidor HLD Basics</h1>
-            </header>
-        </section>
+        <footer> <!-- footer should be here? or should have enclosing brackets?-->
+                <p>Not legitimate Arduino Page, all text copied from Arduino Website created for FreeCodeCamp Technical Documentation Project</p>
+        </footer>
     </main>
-    <footer>
-        <p>Not legitimate Arduino Page, all text copied from Arduino Website created for FreeCodeCamp Technical Documentation Project</p>
-    </footer>
+    
 </body>
 </html>
 
