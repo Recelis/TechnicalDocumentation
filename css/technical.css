@@ -1,13 +1,17 @@
 body{
+    position:static;
     display:flex;
     flex-direction:column; /* tablet or smaller*/
+}
+
+main{
+    overflow:visible;
 }
 
 #navbar{
     display:flex;
     flex-direction:column;
     padding:10px;
-    height:100vh;
 }
 
 .nav-link{
@@ -24,17 +28,16 @@ body{
     color:grey;
 }
 
-main{
-    flex:auto;
-    overflow:auto;
-}
+
 
 @media(min-width:1025px){ /* big size*/
     body{
+        position:fixed;
         flex-direction:row;
     }
-    #navbar{
-        flex-direction:column;
+    main{
+        overflow:auto;
+        max-height:100vh;
     }
     .nav-link{
         padding-top:20px;
